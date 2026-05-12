@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kate Doroshenko — UI/UX Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #FAFAFA;
+            --bg-card: #FFFFFF;
+            --bg-hover: #F5F5F5;
+            --text-primary: #1A1A1A;
+            --text-secondary: #6B7280;
+            --accent: #1B1B1B;
+            --accent-dim: #000000;
+            --border: #E5E7EB;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(10, 10, 10, 0) 100%);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        .lang-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .lang-btn.active {
+            color: var(--accent);
+        }
+
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            transform: translateY(-6px);
+        }
+
+        .contact-icon img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-icon .icon-hover {
+            opacity: 0;
+        }
+
+        .contact-icon:hover .icon-default {
+            opacity: 0;
+        }
+
+        .contact-icon:hover .icon-hover {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 4rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-blobs {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+            animation: pop-blob 8s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            background: #93C5FD;
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            background: #C084FC;
+            top: 30%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        .blob-3 {
+            background: #F9A8D4;
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 4s;
+        }
+
+        @keyframes pop-blob {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 30px) scale(0.9);
+            }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            cursor: pointer;
+            position: relative;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 34px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            color: #FFFFFF;
+            border: 2px solid var(--accent);
+            background-color: var(--accent);
+        }
+
+        .btn-secondary {
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            background-color: transparent;
+        }
+
+        .btn-primary:hover {
+            color: var(--accent);
+            background-color: transparent;
+            scale: 1.05;
+            box-shadow: 0 0px 20px rgba(194, 62, 175, 0);
+        }
+
+        .modal-content a[target="_blank"]:hover {
+         color: #1B1B1B;
+         background-color: transparent;
+         border: 2px solid var(--accent);
+         scale: 1.05;
+         box-shadow: 0 0px 20px rgba(27, 27, 27, 0);
+}
+        .btn-secondary:hover {
+            color: #FFFFFF;
+            background-color: var(--accent);
+            scale: 1.05;
+            box-shadow: 0 0px 20px rgba(194, 62, 175, 0);
+        }
+
+        .btn-primary:active,
+        .btn-secondary:active {
+            scale: 1;
+        }
+
+        .hero-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.8s;
+        }
+
+        .hero-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.8s;
+        }
+
+        .skill-badge {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: 'Space Mono', monospace;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .skill-badge:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.1s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(59, 59, 59, 0.15);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(194, 62, 175, 0) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover .project-image::after {
+            opacity: 1;
+        }
+
+        .project-placeholder {
+            font-size: 3rem;
+            opacity: 0.15;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.9rem;
+            background: rgba(255, 255, 255, 0);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            font-weight: 500;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .meta-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* About Section */
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .contact-value a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            opacity: 0.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-dim);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(194, 62, 175, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 3rem;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .resume-modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            max-width: 1000px;
+            width: 90vw;
+            height: 90vh;
+            padding: 2rem;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resume-modal-content iframe {
+            flex: 1;
+            border: none;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            right: 0;
+            float: right;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            margin: -1rem -1rem 1rem 0;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 2rem 3rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .hero-skills {
+                gap: 0.6rem;
+            }
+
+            .skill-badge {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .projects-section {
+                padding: 4rem 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                padding: 4rem 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .hero-skills {
+                gap: 0.5rem;
+            }
+
+            .skill-badge {
+                font-size: 0.8rem;
+                padding: 0.45rem 0.9rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                padding: 2rem 1.5rem;
+                max-height: 85vh;
+            }
+
+            .resume-modal-content {
+                padding: 1rem;
+                height: 85vh;
+            }
+
+            .modal-close {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 375px) {
+    /* Навигация */
+    nav {
+       flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .logo {
+        font-size: 1rem;
+         margin-bottom: 0.5rem;
+         align-self: flex-start;
+         padding-left: 1rem; 
+    }
+    
+    .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        padding-left: 1rem; 
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        transform: translateY(0);
+    }
+    
+    /* Hero секция */
+    .hero {
+        padding: 3rem 1rem !important;
+    }
+    
+    .hero h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero p {
+        font-size: 0.95rem !important;
+    }
+    
+    /* Кнопки */
+    .btn-primary, .btn-secondary {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Карточки проектов */
+    .projects-grid {
+        padding: 2rem 0;
+        gap: 1rem;
+    }
+    
+    .project-card {
+        margin: 0;
+        padding: 0rem;
+    }
+    
+    .project-tag {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.75rem;
+    }
+    
+    /* Модальные окна */
+    .modal-content {
+        max-width: 100vw;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+    }
+    /* Уменьшаем отступы между тегами */
+    .project-tags {
+        gap: 0rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Уменьшаем размер и отступы у самих тегов */
+    .project-tag {
+        font-size: 0.7rem;
+        padding: 0rem 0rem;
+        margin: 0;
+    }
+    /* Заголовки в карточках */
+    .project-card h3 {
+        margin-bottom: 0.5rem !important;
+        font-size: 1.2rem;
+    }
+    
+    .project-card h2 {
+        margin-bottom: 0.75rem !important;
+        font-size: 1.4rem;
+    }
+    .project-card {
+        padding: 0rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Kate Doroshenko<span>.</span></div>
+        <ul class="nav-links">
+            <li>
+                <a href="mailto:ekat.doroshenko5@gmail.com" title="Email" class="contact-icon">
+                    <img src="images/mail_default.svg" alt="Email" class="icon-default">
+                    <img src="images/mail_hover.svg" alt="Email" class="icon-hover">
+                </a>
+            </li>
+            <li>
+                <a href="https://t.me/Kate0579" target="_blank" title="Telegram" class="contact-icon">
+                    <img src="images/TG_default.svg" alt="Telegram" class="icon-default">
+                    <img src="images/TG_hover.svg" alt="Telegram" class="icon-hover">
+                </a>
+            </li>
+            <li>
+                <a href="https://www.behance.net/fc5cb4e2" target="_blank" title="Behance" class="contact-icon">
+                    <img src="images/be_default.svg" alt="Behance" class="icon-default">
+                    <img src="images/be_hover.svg" alt="Behance" class="icon-hover">
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+        <div class="hero-content">
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.9rem; color: var(--accent); margin-bottom: 1rem; font-weight: 600; letter-spacing: 0.05em;">PORTFOLIO</p>
+            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; line-height: 1.1;">Product Designer crafting <br>intuitive digital experiences</h1>
+            <p style="font-size: 1.15rem; line-height: 1.7; color: var(--text-secondary); max-width: 700px; margin-bottom: 2.5rem;">UX/UI Designer with 3+ years of experience in web and mobile. I turn complex ideas into simple, usable interfaces.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="#work" class="btn-primary">View Projects</a>
+                <a href="images/resume.pdf" target="_blank" class="btn-secondary">Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="work" class="projects-section">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="projects-grid">
+            <!-- Project 1 - Football Club Mobile App -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/project-1.png" alt="Football Club Mobile App" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <div class="project-tags">
+                        <span class="tag">Mobile</span>
+                        <span class="tag">Sports</span>
+                        <span class="tag">UX Research</span>
+                    </div>
+                    <h3 class="project-title">Football Club Mobile App</h3>
+                </div>
+            </div>
+
+            <!-- Project 4 - WellCoach -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/project-4.png" alt="WellCoach Service" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <div class="project-tags">
+                        <span class="tag">Health</span>
+                        <span class="tag">Startup</span>
+                        <span class="tag">UX Research</span>
+                    </div>
+                    <h3 class="project-title">WellCoach Service</h3>
+                </div>
+            </div>
+
+            <!-- Project 5 - HC Sochi Jerseys -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/project-5.png" alt="HC Sochi Jerseys Website" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <div class="project-tags">
+                        <span class="tag">Landing</span>
+                        <span class="tag">Catalog</span>
+                        <span class="tag">Sports</span>
+                    </div>
+                    <h3 class="project-title">HC Sochi Jerseys Website</h3>
+                </div>
+            </div>
+
+            <!-- Project 2 - Auto Parts -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/project-2.png" alt="Auto Parts E-commerce Website" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <div class="project-tags">
+                        <span class="tag">Website</span>
+                        <span class="tag">E-commerce</span>
+                        <span class="tag">UX/UI</span>
+                    </div>
+                    <h3 class="project-title">Auto Parts E-commerce Website</h3>
+                </div>
+            </div>
+
+            <!-- Project 3 - ONE CONSULTING -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/project-3.png" alt="ONE CONSULTING Website" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <div class="project-tags">
+                        <span class="tag">Website</span>
+                        <span class="tag">B2B</span>
+                        <span class="tag">Consulting</span>
+                    </div>
+                    <h3 class="project-title">Information Website for ONE CONSULTING</h3>
+                </div>
+            </div>
+
+            <!-- Project 6 - Mantera Travel -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/project-6.png" alt="Mantera Travel Personal Account" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <div class="project-tags">
+                        <span class="tag">Web App</span>
+                        <span class="tag">Travel</span>
+                        <span class="tag">Loyalty Program</span>
+                    </div>
+                    <h3 class="project-title">Mantera Travel Personal Account</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Kate Doroshenko. All rights reserved.</p>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="modal">
+        <div class="resume-modal-content">
+            <span class="modal-close">&times;</span>
+            <iframe src="images/resume.pdf" width="100%" height="100%"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Project data
+        const projectData = {
+            1: {
+                title: "Football Club Mobile App",
+                image: "images/project-1.png",
+                tags: ["Mobile", "Sports", "UX Research"],
+                intro: "Developed a mobile app for a football club from scratch. The goal of the project was to create a unified digital space for fans where they could follow matches, club news, player statistics, and interact with the club. The project included the full product design cycle: research, UX architecture, design system creation, and interface development.",
+                problem: "Football clubs often interact with fans through different channels: websites, social networks, third-party services. This creates a fragmented user experience.<br><br>The main problems are:",
+                problemList: "Difficult for fans to quickly find information about matches and results. No single platform for news, statistics, and club content. No convenient way to engage fans.",
+                task: "Create a mobile app that:",
+                taskList: "Brings all club content together in one place. Provides access to ticket purchases, merchandise, and the loyalty system. Improves the user experience for fans. Increases fan engagement. Makes it easy to follow the team's matches and results.",
+                role: "As UX/UI Designer I was responsible for:",
+                roleList: "UX research. Competitor analysis. Designing user scenarios. Information architecture. Wireframes. Design system creation. UI design. Preparation of layouts for development.",
+                uxResearch: true,
+                targetAudienceImage: "images/football-target-audience.png",
+                userJourneyMap: "Persona: Andrew, 28 years old. Regularly watches the team's matches, follows the news, and wants to always be up to date with the club's events. Active fan who attends matches and engages with club content.",
+                userJourneyMapImage: "images/football-ujm.png",
+                competitorAnalysis: "Analyzed apps of other football clubs (FC Barcelona, FC Spartak, Zenit, FC Bayern, HC Sochi, Liverpool FC, The Arsenal) and sports platforms (NHL, VHL, PL, OneFootball, RPL).<br><br>Key insights:",
+                competitorInsights: "Most apps have cluttered navigation. The most important features for users are match results, news, team lineups, and statistics. Fans want to receive live updates during matches.",
+                competitorConclusion: "Based on analysis, identified key features and developed app structure with these in mind.",
+                sitemapImage: "images/football-sitemap.png",
+                uxDesign: "Started by creating wireframes to test the logic and structure of screens. Main focus was on quick access to matches, convenient navigation, display of statistics, and viewing club content. Wireframes helped determine the optimal interface structure before moving on to visual design.",
+                uxDesignImage: "images/football-ux-design.png",
+                designSystem: "A design system was developed for the project, which ensured interface consistency, accelerated work on the screens, and facilitated the work of developers.<br><br>It included:",
+                designSystemList: "Color palette. Typography. Grid. Components (buttons, cards, tabs, navigation). Element states (hover, active, disabled). Icons.",
+                designSystemNote: "As an example, here is part of the design system:",
+                designSystemImage: "images/football-design-system.png",
+                uiDesign: "Developed visual interface based on previously created UX structure and design system. Emphasis on sports dynamics, ease of information perception, visual hierarchy, ease of viewing, and quick access to statistics and match results. Design supports the football club's brand and creates an emotional connection with fans.<br><br>Main user screens developed include:",
+                uiScreensList: "Main app screen. Match center. Match page. Match calendar. Team roster and player profile. Statistics and tournament table. News feed. Ticket purchase scenario. Merchandise purchase scenario. User account. Registration/authorization screens.",
+                uiImage: "images/football-ui.png",
+                result: "Complete mobile app concept that improves access to club information, increases fan engagement, combines all club content in one product, allows users to purchase tickets for matches and merchandise, and provides access to the loyalty system."
+            },
+            2: {
+                title: "WellCoach Service",
+                image: "images/project-4.png",
+                tags: ["Health", "Startup", "UX Research"],
+                intro: "A service for trainers, dietitians, nutritionists, and their clients. WellCoach is designed for those who want to regularly and successfully take care of their health. Here you can find a specialist in healthy eating and fitness and track your progress.",
+                task: "The web application development task was to create a directory of nutrition specialists with the ability to search and schedule a consultation. We also wanted to make the service user-friendly, so specialists could perform all their tasks (communicating with clients, storing and processing client records, communicating with colleagues, etc.). The service was designed with a mobile-first approach.",
+                researchSection: true,
+                researchDescription: "<strong style='color: #6B7280;'>Target:</strong> <span style='color: #6B7280;'>Find convenient solutions that allow people to take care of their health on a regular basis.</span><br><strong style='color: #6B7280;'>Research method:</strong><ul style='margin-top: -2.5rem; padding-left: 1.5rem; color: #6B7280; margin-bottom: 0; padding-top: 0.3rem;'><li>In-depth interviews with clients and specialists</li><li>Market research of similar services</li></ul>",
+                targetAudienceImage: "images/wellcoach-target-audience.png",
+                jobStoriesImage: "images/wellcoach-job-stories.png",
+                scenarioImage: "images/wellcoach-scenario.png",
+                researchResultsSpecialists: "A convenient platform for listing their services. Communicate with clients in one place (currently, this involves various messengers, where life and work get in the way). Manage client records and track their progress.",
+                researchResultsClients: "Choose a specialist with clear information about their services, their prices, their professional activities, reviews, etc. Communicate with the specialist online if needed.",
+                finalDesign: "A design for an appointment has been developed with the ability to select a specialist based on your needs.",
+                finalDesignImage: "images/wellcoach-final-design.png",
+                result: "A lot of work was done to develop other application scenarios, but unfortunately the project remained a project due to lack of funding.",
+                link: "https://personal-training-and-nutrition.github.io/personal-training-and-nutrition-frontend/#/card-spec"
+            },
+            3: {
+                title: "HC Sochi Jerseys Website",
+                image: "images/project-5.png",
+                tags: ["Landing", "Catalog", "Sports"],
+                task: "Develop a website for the club's anniversary to sell unique player jerseys.",
+                uiDesignImage: "images/sochi-ui-design.jpg",
+                result: "The website was successfully launched in time for the anniversary date, allowing fans to purchase jerseys through the platform. The design incorporated the club's branding while creating an engaging shopping experience for hockey fans."
+            },
+            4: {
+                title: "Auto Parts E-commerce Website",
+                image: "images/project-2.png",
+                tags: ["Website", "E-commerce", "UX/UI"],
+                intro: "Avtodepo is a major auto parts store in Primorsky Krai",
+                task: "Create an additional website for the company to sell heater motors and engine cooling systems to attract customers",
+                research: "Studying the main company website",
+                researchText: "It was necessary to create an additional site similar to the main one, but with a more modern design, as the current one was visually outdated. At the same time, it was necessary to preserve the color scheme of the original site to maintain brand recognition.",
+                researchImage1: "images/autodepo-1.jpg",
+                researchImage2: "images/autodepo-3.jpg",
+                roleTitle: "As UX/UI Designer",
+                roleText: "As part of the project, I worked on:",
+                roleList: "catalog structure and product filtering. selection scenarios (including complex parameter-based selection). product cards and listings. user journey from search to purchase",
+                roleNote: "Special attention was paid to working with data overload and simplifying the selection process for users.",
+                finalDesignTitle: "Final Design",
+                finalDesignText: "As a result of the work done, a modern adaptive web page layout was developed, focused on user convenience and compliance with current web design trends.",
+                finalDesignImage: "images/autodepo-final.jpg",
+                resultsTitle: "Results",
+                resultsText: "The project was successfully launched and is generating new orders. The main goal was achieved - attracting new customers.",
+                link: "https://autodeporadiators.ru/"
+            },
+            5: {
+                title: "Information Website for ONE CONSULTING",
+                image: "images/project-3.png",
+                tags: ["Landing", "Catalog", "Sports"],
+                intro: "Corporate website for a consulting company that helps businesses go through registration and certification in the CIFER system for export to China. Project theme: B2B services.",
+                task: "Design an informational website to attract new clients.",
+                problems: "Users faced complex and overloaded information. It was unclear where to start and which services were necessary. The interface had to inspire trust and a sense of expertise. Users were not always ready to submit an application immediately.",
+                researchTitle: "Research",
+                researchText: "An analysis of competitors' websites was conducted to identify the best industry practices and form the company's competitive advantages. The research made it possible to identify and form the company's advantages among intermediaries in the Chinese market, study the services provided, and adapt our digital toolkit to the expectations of the target audience.",
+                resultsTitle: "Results",
+                resultsIntro: "Structured a large amount of information and reduced cognitive load",
+                resultsList: "Designed a clear first screen with a clear value proposition. Built a visual hierarchy and business UI to increase trust. Designed a user journey with several entry points to the application. Made the interface universal and understandable for users with different levels of experience.",
+                finalDesignTitle: "Final Design",
+                resultImage: "images/cifer-result.jpg",
+                link: "https://cifer.expert/ru/"
+            },
+            6: {
+                title: "Development of a Personal Account for the Mantera Travel Loyalty Program",
+                image: "images/project-6.png",
+                tags: ["Web App", "Travel", "Loyalty Program"],
+                taskContext: "The project aims to increase customer engagement through a convenient tool for managing your bookings and bonus program.",
+                mainProblems: "Unify loyalty status, bonuses, and order history data in a single interface. Loyalty program transparency: clearly visualize statuses (WHITE, SILVER, GOLD, VIP) and the conditions for achieving them. Personal data management: easily edit your profile, add information about children and travel companions. Transaction tracking: detailed purchase history filtered by status and period. Simplified operations: intuitive steps for canceling reservations and requesting refunds.",
+                whatWasDoneTitle: "What Was Done",
+                whatWasDoneText: "The following sections have been created in the user's personal account:",
+                profileSection: "A profile with personal data and contact information, and an interface for managing children and travel companions.",
+                profileImage: "images/mantera-profile.png",
+                historySection: "Purchase history with order details.",
+                historyImage: "images/mantera-history.png",
+                loyaltySection: "Loyalty program management system.",
+                loyaltyImage: "images/mantera-loyalty.png",
+                resultsTitle: "Results",
+                resultsText: "Reduced time spent on repeat orders through quick access to history. Simplified management of personal and travel companion data. Increased loyalty program transparency: customers can see progress and upcoming statuses. A system for filtering and sorting purchase history has been implemented."
+            }
+        };
+
+        // Modal functionality
+        const modal = document.getElementById('projectModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeBtn = document.querySelector('.modal-close');
+
+        // Open modal
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.addEventListener('click', () => {
+                const projectId = index + 1;
+                const project = projectData[projectId];
+                
+                let content = `
+                    <img src="${project.image}" alt="${project.title}" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">
+                    <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                        ${project.tags.map(tag => `<span style="font-size: 0.85rem; padding: 0.5rem 1rem; background: rgba(194, 62, 175, 0); color: #6B7280; border-radius: 6px; font-weight: 500;">${tag}</span>`).join('')}
+                    </div>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">${project.title}</h2>
+                `;
+
+                if (project.intro) {
+                    content += `<p style="color: #6B7280; line-height: 1.8; margin-bottom: 2rem; font-size: 1.05rem;">${project.intro}</p>`;
+                }
+
+                if (project.problem) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #6B7280;">Problem</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.problem}</p>`;
+                }
+
+                if (project.problemList) {
+                    content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.problemList.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.task) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Task</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.task}</p>`;
+                }
+
+                if (project.taskList) {
+                    content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.taskList.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.roleList && !project.roleTitle) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">My Role</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.role}</p>
+                    <ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.roleList.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.problems) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Problems</h3>
+                    <ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                        ${project.problems.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.researchTitle && project.researchText) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">${project.researchTitle}</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem;">${project.researchText}</p>`;
+                }
+
+                if (project.research && project.researchText) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">${project.research}</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem;">${project.researchText}</p>`;
+                }
+
+                if (project.researchImage1) {
+                    content += `<img src="${project.researchImage1}" alt="Research 1" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 1.5rem;">`;
+                }
+
+                if (project.researchImage2) {
+                    content += `<img src="${project.researchImage2}" alt="Research 2" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 2rem;">`;
+                }
+
+                if (project.roleTitle) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">${project.roleTitle}</h3>`;
+                    if (project.roleText) {
+                        content += `<p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.roleText}</p>`;
+                    }
+                    if (project.roleList) {
+                        content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem; margin-top: 0;">
+                            ${project.roleList.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                        </ul>`;
+                    }
+                    if (project.roleNote) {
+                        content += `<p style="color: #6B7280; line-height: 1.8; margin-bottom: 2rem; margin-top: 0;">${project.roleNote}</p>`;
+                    }
+                }
+
+                if (project.resultsTitle && project.resultsIntro) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">${project.resultsTitle}</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.resultsIntro}</p>`;
+                }
+
+                if (project.resultsList) {
+                    content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 2rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.resultsList.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.finalDesignTitle && project.resultImage) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">${project.finalDesignTitle}</h3>`;
+                }
+
+                if (project.resultImage) {
+                    content += `<img src="${project.resultImage}" alt="Final Design" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.finalDesignImage && !project.finalDesign) {
+                    content += `<img src="${project.finalDesignImage}" alt="Final Design" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 2rem;">`;
+                }
+
+                // UX Research section
+                if (project.uxResearch) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 3rem; margin-bottom: 1.5rem; color: #1A1A1A;">UX Research</h3>`;
+                }
+
+                // Research section for WellCoach
+                if (project.researchSection) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 3rem; margin-bottom: 1.5rem; color: #1A1A1A;">Research</h3>`;
+                    if (project.researchDescription) {
+                        content += `<p style="color: #6B7280; line-height: 1.8; margin-bottom: 2rem;">${project.researchDescription}</p>`;
+                    }
+                }
+
+                if (project.targetAudienceImage) {
+                    content += `<h4 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Target Audience Analysis</h4>
+                    <img src="${project.targetAudienceImage}" alt="Target Audience Analysis" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 2rem;">`;
+                }
+
+                if (project.userJourneyMap) {
+                    content += `<h4 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">User Journey Map</h4>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem;">${project.userJourneyMap}</p>`;
+                }
+
+                if (project.userJourneyMapImage) {
+                    content += `<img src="${project.userJourneyMapImage}" alt="User Journey Map" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 2rem;">`;
+                }
+
+                if (project.competitorAnalysis) {
+                    content += `<h4 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Competitor Analysis</h4>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.competitorAnalysis}</p>`;
+                }
+
+                if (project.competitorInsights) {
+                    content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.competitorInsights.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.competitorConclusion) {
+                    content += `<p style="color: #6B7280; line-height: 1.8; margin-bottom: 2rem;">${project.competitorConclusion}</p>`;
+                }
+
+                if (project.sitemapImage) {
+                    content += `<h4 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Sitemap</h4>
+                    <img src="${project.sitemapImage}" alt="Sitemap" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 2rem;">`;
+                }
+
+                if (project.competitorAnalysisText) {
+                    content += `<h4 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Competitor Analysis</h4>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.competitorAnalysisText}</p>`;
+                }
+
+                if (project.competitorInsights) {
+                    content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.competitorInsights.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.jobStoriesImage) {
+                    content += `<h4 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Job Stories</h4>
+                    <img src="${project.jobStoriesImage}" alt="Job Stories" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.scenarioImage) {
+                    content += `<h4 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Scenario for Making an Appointment with a Specialist</h4>
+                    <img src="${project.scenarioImage}" alt="Scenario" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.researchResultsSpecialists || project.researchResultsClients) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Research Results</h3>`;
+                    content += `<p style="color: #6B7280; line-height: 1.8; margin-bottom: 1rem;">Through my research, I understood what businesses want in specialists and what clients want.</p>`;
+                }
+
+                if (project.researchResultsSpecialists) {
+                    content += `<p style="color: #6B7280; font-weight: 600; margin-top: 0; margin-bottom: 0.5rem;"><strong>Specialists want:</strong></p>
+                    <ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.researchResultsSpecialists.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.researchResultsClients) {
+                    content += `<p style="color: #6B7280; font-weight: 600; margin-top: 0; margin-bottom: 0.5rem;"><strong>Clients want:</strong></p>
+                    <ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.researchResultsClients.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.researchResults) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Research Results</h3>
+                    <p style="color: #a0a0a0; line-height: 1.8; margin-bottom: 1.5rem;">${project.researchResults}</p>`;
+                }
+
+                if (project.finalDesign) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Final Design</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1rem;">${project.finalDesign}</p>`;
+                }
+
+                if (project.uxDesign) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">UX Design</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem;">${project.uxDesign}</p>`;
+                }
+
+                if (project.uxDesignImage) {
+                    content += `<img src="${project.uxDesignImage}" alt="UX Design Wireframes" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 2rem;">`;
+                }
+
+                if (project.designSystem) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Design System</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.designSystem}</p>`;
+                }
+
+                if (project.designSystemList) {
+                    content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.designSystemList.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.designSystemNote) {
+                    content += `<p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; margin-top: 0;">${project.designSystemNote}</p>`;
+                }
+
+                if (project.designSystemImage) {
+                    content += `<img src="${project.designSystemImage}" alt="Design System" style="width: 100%; border: 1px solid #E5E7EB; margin-bottom: 2rem;">`;
+                }
+
+                if (project.uiDesign) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">UI Design</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 0.5rem;">${project.uiDesign}</p>`;
+                }
+
+                if (project.uiScreensList) {
+                    content += `<ul style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem; margin-top: 0;">
+                        ${project.uiScreensList.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.uiImage) {
+                    content += `<img src="${project.uiImage}" alt="UI Screens" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.targetAudience) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Target Audience</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem;">${project.targetAudience}</p>`;
+                }
+
+                if (project.process) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Process</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem;">${project.process}</p>`;
+                }
+
+                if (project.uiDesignImage) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">UI Design</h3>
+                    <img src="${project.uiDesignImage}" alt="UI Design" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.result) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Result</h3>
+                    <p style="color: #6B7280; line-height: 1.8; margin-bottom: 1.5rem;">${project.result}</p>`;
+                }
+
+                if (project.taskContext) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Task Context</h3>
+                    <p style="color: rgb(107, 114, 128); line-height: 1.8; margin-bottom: 1.5rem;">${project.taskContext}</p>`;
+                }
+
+                if (project.mainProblems) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">Main Problems Solved</h3>
+                    <ul style="color: rgb(107, 114, 128); line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                        ${project.mainProblems.split('. ').filter(s => s.trim()).map(s => `<li>${s.trim()}${s.endsWith('.') ? '' : '.'}</li>`).join('')}
+                    </ul>`;
+                }
+
+                if (project.whatWasDoneTitle) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">${project.whatWasDoneTitle}</h3>`;
+                    if (project.whatWasDoneText) {
+                        content += `<p style="color: rgb(107, 114, 128); line-height: 1.8; margin-bottom: 1.5rem;">${project.whatWasDoneText}</p>`;
+                    }
+                }
+
+                if (project.profileSection) {
+                    content += `<ul style="color: rgb(107, 114, 128); line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem;">
+                        <li>${project.profileSection}</li>
+                    </ul>`;
+                }
+
+                if (project.profileImage) {
+                    content += `<img src="${project.profileImage}" alt="Profile Section" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.historySection) {
+                    content += `<ul style="color: rgb(107, 114, 128); line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem;">
+                        <li>${project.historySection}</li>
+                    </ul>`;
+                }
+
+                if (project.historyImage) {
+                    content += `<img src="${project.historyImage}" alt="Purchase History" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.loyaltySection) {
+                    content += `<ul style="color: rgb(107, 114, 128); line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem;">
+                        <li>${project.loyaltySection}</li>
+                    </ul>`;
+                }
+
+                if (project.loyaltyImage) {
+                    content += `<img src="${project.loyaltyImage}" alt="Loyalty Program" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">`;
+                }
+
+                if (project.resultsTitle && !project.resultsIntro) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">${project.resultsTitle}</h3>`;
+                    if (project.resultsText) {
+                        content += `<p style="color: rgb(107, 114, 128); line-height: 1.8; margin-bottom: 1.5rem;">${project.resultsText}</p>`;
+                    }
+                }
+
+                if (project.whatWasDone) {
+                    content += `<h3 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #1A1A1A;">What Was Done</h3>
+                    <p style="color: #a0a0a0; line-height: 1.8; margin-bottom: 1.5rem;">${project.whatWasDone}</p>`;
+                }
+
+                if (project.description) {
+                    content += `<p style="color: #a0a0a0; line-height: 1.8; margin-bottom: 1.5rem;">${project.description}</p>`;
+                }
+
+                if (project.link) {
+                    content += `<a href="${project.link}" target="_blank" style="display: inline-block; padding: 1rem 2rem; font-size: 1rem; border-radius: 34px; font-weight: 600; transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1); text-decoration: none; color: #FFFFFF; border: 2px solid #1B1B1B; background-color: #1B1B1B; margin-top: 1rem;">View Live Site</a>`;
+                }
+
+                modalBody.innerHTML = content;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe project cards
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Resume modal functionality
+        // Resume button removed - now opens Google Docs directly
+
+        // Close resume modal when clicking close button or outside
+        resumeModal.querySelector('.modal-close').addEventListener('click', () => {
+            resumeModal.style.display = 'none';
+        });
+
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                resumeModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
